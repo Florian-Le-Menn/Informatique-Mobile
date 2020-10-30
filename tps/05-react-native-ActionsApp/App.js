@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, View, ScrollView} from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import Entete from './src/Entete'
 import Saisie from './src/Saisie'
 import BoutonCreer from './src/BoutonCreer'
@@ -14,7 +14,8 @@ export default class App extends React.Component {
     // état global de l'application
     // il y aura probalement d'autres informations à stocker
     state = {
-        texteSaisie: ''
+        texteSaisie: 'un texte',
+        actions: ["test", "test2", "test3"]
     }
 
     /**
@@ -23,6 +24,9 @@ export default class App extends React.Component {
      * @param nouvelleSaisie la valeur saisie
      */
     quandLaSaisieChange(nouvelleSaisie) {
+        this.setState({
+            texteSaisie: nouvelleSaisie
+        })
         console.log('la saisie à changée', nouvelleSaisie)
     }
 
@@ -30,21 +34,26 @@ export default class App extends React.Component {
      * Méthode invoquée lors du clic sur le bouton `Valider`.
      */
     validerNouvelleAction() {
+        var nouveauTableau = this.state.actions
+        nouveauTableau.push(this.state.texteSaisie)
+        this.setState({
+            actions: nouveauTableau,
+            texteSaisie: ""
+        })
+
         console.log('Vous avez cliqué sur Valider !')
     }
 
     render() {
-        const {texteSaisie} = this.state
-
         return (
             <View style={styles.conteneur}>
                 <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
-                    <Entete/>
-                    <Saisie texteSaisie={texteSaisie} evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)}/>
-                    <ListeActions />
-                    <BoutonCreer onValider={() => this.validerNouvelleAction()}/>
+                    <Entete />
+                    <Saisie texteSaisie={this.state.texteSaisie} evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)} />
+                    <ListeActions actions={this.state.actions} />
+                    <BoutonCreer onValider={() => this.validerNouvelleAction()} />
                 </ScrollView>
-                <Menu/>
+                <Menu />
             </View>
         )
     }

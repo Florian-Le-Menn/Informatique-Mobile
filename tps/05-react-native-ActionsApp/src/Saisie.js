@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, TextInput, View} from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 
 /**
  * Le composant saisie est un composant sans état.
@@ -17,12 +17,14 @@ import {StyleSheet, TextInput, View} from 'react-native'
  *
  * TODO 4. Valoriser la propriété `onChangeText` de l'élément <TextInput> avec la valeur de `evtTexteModifie`
  */
-const Saisie = ({texteSaisie, evtTexteModifie}) => (
-    <View>
-        <TextInput
+const Saisie = ({ texteSaisie, evtTexteModifie }) => (
+    <View style={styles.conteneurSaisie}>
+        <TextInput style={styles.texteSaisie}
             placeholder='Quelle prochaine action ?'
             placeholderTextColor='#CACACA'
-            selectionColor='#666666'/>
+            selectionColor='#666666'
+            value={texteSaisie}
+            onChangeText={evtTexteModifie} />
     </View>
 )
 
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 3,
         shadowColor: '#000000',
-        shadowOffset: {width: 2, height: 2},
+        shadowOffset: { width: 2, height: 2 },
     },
     texteSaisie: {
         height: 60,

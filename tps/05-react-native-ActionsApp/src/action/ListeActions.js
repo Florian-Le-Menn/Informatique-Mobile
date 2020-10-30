@@ -1,13 +1,16 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import { View, Text } from 'react-native'
 import UneAction from './UneAction'
 
 
-const ListeActions = () => {
+const ListeActions = ({ actions }) => {
 
+    console.log(actions)
     return (
         <View>
-            <Text>Ici prochainement une liste d'actions</Text>
+            {actions.map((item, index) => {
+                return (<UneAction key={index} action={item} />)
+            })}
         </View>
     )
 }
